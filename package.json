@@ -1,0 +1,33 @@
+{
+  "name": "posthog-trust-kit",
+  "version": "0.1.0",
+  "description": "PostHog dashboards and weekly trust briefs as code: one JSON config, two scripts, zero dependencies.",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kjonathan254/posthog-trust-kit.git"
+  },
+  "keywords": [
+    "posthog",
+    "analytics",
+    "dashboard-as-code",
+    "product-analytics",
+    "devops"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "create_dashboard.mjs",
+    "trust_brief.mjs",
+    "config.example.json",
+    "examples/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "dashboard": "node create_dashboard.mjs",
+    "brief": "node trust_brief.mjs"
+  }
+}
