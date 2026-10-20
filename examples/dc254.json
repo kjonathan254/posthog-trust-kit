@@ -1,0 +1,29 @@
+{
+  "name": "DC254 Trust Engine",
+  "project_id": "674556",
+  "launch_date": "2026-10-19",
+  "funnel_window_days": 14,
+  "funnel": [
+    { "event": "$pageview", "label": "Read an article" },
+    { "event": "export_interest", "label": "Used the tracker" },
+    { "event": "subscribe_optin_started", "label": "Started opt-in" }
+  ],
+  "signals": [
+    { "event": "subscribe_optin_started", "label": "Opt-ins started" },
+    { "event": "export_interest", "label": "Tracker exports" },
+    { "event": "contact_message_sent", "label": "Contact messages" },
+    { "event": "sponsor_click", "label": "Sponsor clicks" },
+    { "event": "$pageview", "label": "Human pageviews" }
+  ],
+  "guardrails": [
+    { "event": "subscribe_honeypot_hit", "label": "Honeypot hits" },
+    { "event": "sponsor_click_rejected", "label": "Rejected sponsor clicks" },
+    { "event": "csp_violation", "label": "CSP violations" }
+  ],
+  "breakdowns": [
+    { "event": "sponsor_click", "by": "slug", "label": "Sponsor interest by tenant slug" },
+    { "event": "csp_violation", "by": "directive", "label": "CSP tripwire by directive" }
+  ],
+  "text_tile": "**The trust loop, in one page:** attract -> prove -> convert.\n\n1. **Attract** - human pageviews (bots already filtered at capture time).\n2. **Prove** - tracker exports and sponsor clicks are professionals acting on our intel.\n3. **Convert** - subscribe opt-ins are trust made formal.\n\nGuardrails: CSP tripwire (browser blocks something = regression alarm), honeypot hits and rejected sponsor hosts (abuse attempts).",
+  "tags": ["dc254", "trust-kit"]
+}

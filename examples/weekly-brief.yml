@@ -1,0 +1,35 @@
+# Weekly trust brief - scheduler template (posthog-trust-kit).
+# Copy to .github/workflows/trust-brief.yml in YOUR repo and add the
+# POSTHOG_PERSONAL_API_KEY repo secret (read-only key is sufficient).
+# The sheet becomes a login-only artifact: safe for public repos, where
+# committing it (or printing it to public Action logs) would leak
+# operational intel.
+name: Trust Brief (weekly)
+
+on:
+  schedule:
+    - cron: "0 6 * * 1" # Monday 06:00 UTC (adjust for your timezone)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  datasheet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Generate data sheet
+        env:
+          POSTHOG_PERSONAL_API_KEY: ${{ secrets.POSTHOG_PERSONAL_API_KEY }}
+        run: node trust_brief.mjs --config config.json --quiet --out trust-brief-$(date -u +%F).md
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: trust-brief-datasheet
+          path: trust-brief-*.md
+          retention-days: 90
+          if-no-files-found: error

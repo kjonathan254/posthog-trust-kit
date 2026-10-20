@@ -1,0 +1,24 @@
+{
+  "name": "My Site Trust Engine",
+  "project_id": "0",
+  "launch_date": "2026-01-01",
+  "funnel_window_days": 14,
+  "funnel": [
+    { "event": "$pageview", "label": "Read" },
+    { "event": "signup_started", "label": "Engaged" },
+    { "event": "subscription_started", "label": "Opt-in started" }
+  ],
+  "signals": [
+    { "event": "subscription_started", "label": "Opt-ins started" },
+    { "event": "signup_started", "label": "Signups" },
+    { "event": "contact_message_sent", "label": "Contact messages" },
+    { "event": "$pageview", "label": "Human pageviews" }
+  ],
+  "guardrails": [
+    { "event": "honeypot_hit", "label": "Honeypot hits" },
+    { "event": "csp_violation", "label": "CSP violations" }
+  ],
+  "breakdowns": [],
+  "text_tile": null,
+  "tags": ["trust-kit"]
+}
